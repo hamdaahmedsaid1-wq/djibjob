@@ -1,0 +1,13 @@
+# Sauvegardes de base de données
+*.sql
+
+# Variables d'environnement
+.env
+.env.*
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Scripts de test local
+test-*.ps1
