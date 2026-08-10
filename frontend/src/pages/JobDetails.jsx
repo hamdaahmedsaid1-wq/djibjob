@@ -16,6 +16,10 @@ import {
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "http://localhost:5000";
+
 function JobDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -132,6 +136,25 @@ function JobDetails() {
     );
   }
 
+  function buildLogoUrl(logoPath) {
+    if (!logoPath) {
+      return "";
+    }
+
+    if (
+      logoPath.startsWith("http://") ||
+      logoPath.startsWith("https://")
+    ) {
+      return logoPath;
+    }
+
+    if (logoPath.startsWith("uploads/")) {
+      return `${BACKEND_URL}/${logoPath}`;
+    }
+
+    return `${BACKEND_URL}/uploads/logos/${logoPath}`;
+  }
+
   if (loading) {
     return (
       <section className="mx-auto max-w-5xl px-6 py-16">
@@ -169,13 +192,9 @@ function JobDetails() {
               <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-blue-50">
                 {job.company_logo ? (
                   <img
-                    src={
-                      job.company_logo.startsWith(
-                        "uploads/"
-                      )
-                        ? `http://localhost:5000/${job.company_logo}`
-                        : `http://localhost:5000/uploads/logos/${job.company_logo}`
-                    }
+                    src={buildLogoUrl(
+                      job.company_logo
+                    )}
                     alt={job.company_name}
                     className="h-full w-full object-cover"
                   />

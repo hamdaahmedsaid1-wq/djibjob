@@ -14,6 +14,10 @@ import {
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "http://localhost:5000";
+
 function CandidateDashboard() {
   const { user, logout } = useAuth();
 
@@ -138,7 +142,7 @@ function CandidateDashboard() {
             <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-sm">
               {user?.profile_image ? (
                 <img
-                  src={`http://localhost:5000/${user.profile_image}`}
+                  src={`${BACKEND_URL}/${user.profile_image}`}
                   alt={user.name}
                   className="h-full w-full object-cover"
                 />
@@ -181,11 +185,9 @@ function CandidateDashboard() {
             <div className="inline-flex rounded-xl bg-blue-500 p-4 text-white">
               <FiFileText size={26} />
             </div>
-
             <p className="mt-5 text-sm font-semibold text-slate-500">
               Candidatures
             </p>
-
             <p className="mt-2 text-4xl font-bold text-slate-900">
               {applications.length}
             </p>
@@ -195,11 +197,9 @@ function CandidateDashboard() {
             <div className="inline-flex rounded-xl bg-orange-500 p-4 text-white">
               <FiClock size={26} />
             </div>
-
             <p className="mt-5 text-sm font-semibold text-slate-500">
               En attente
             </p>
-
             <p className="mt-2 text-4xl font-bold text-slate-900">
               {pendingCount}
             </p>
@@ -209,11 +209,9 @@ function CandidateDashboard() {
             <div className="inline-flex rounded-xl bg-emerald-500 p-4 text-white">
               <FiCheckCircle size={26} />
             </div>
-
             <p className="mt-5 text-sm font-semibold text-slate-500">
               Acceptées
             </p>
-
             <p className="mt-2 text-4xl font-bold text-slate-900">
               {acceptedCount}
             </p>
@@ -223,16 +221,13 @@ function CandidateDashboard() {
             <div className="inline-flex rounded-xl bg-red-500 p-4 text-white">
               <FiXCircle size={26} />
             </div>
-
             <p className="mt-5 text-sm font-semibold text-slate-500">
               Refusées
             </p>
-
             <p className="mt-2 text-4xl font-bold text-slate-900">
               {rejectedCount}
             </p>
           </div>
-
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -241,19 +236,13 @@ function CandidateDashboard() {
             to="/candidate/profile"
             className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
           >
-            <FiUser
-              size={32}
-              className="text-blue-600"
-            />
-
+            <FiUser size={32} className="text-blue-600" />
             <h2 className="mt-5 text-2xl font-bold text-slate-900">
               Mon profil
             </h2>
-
             <p className="mt-3 text-slate-600">
               Modifiez vos informations professionnelles.
             </p>
-
             <p className="mt-5 font-semibold text-blue-600">
               Modifier mon profil →
             </p>
@@ -263,19 +252,13 @@ function CandidateDashboard() {
             to="/jobs"
             className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
           >
-            <FiBriefcase
-              size={32}
-              className="text-purple-600"
-            />
-
+            <FiBriefcase size={32} className="text-purple-600" />
             <h2 className="mt-5 text-2xl font-bold text-slate-900">
               Rechercher un emploi
             </h2>
-
             <p className="mt-3 text-slate-600">
               Découvrez les nouvelles opportunités.
             </p>
-
             <p className="mt-5 font-semibold text-purple-600">
               Voir les offres →
             </p>
@@ -285,24 +268,17 @@ function CandidateDashboard() {
             to="/candidate/cv"
             className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
           >
-            <FiUpload
-              size={32}
-              className="text-emerald-600"
-            />
-
+            <FiUpload size={32} className="text-emerald-600" />
             <h2 className="mt-5 text-2xl font-bold text-slate-900">
               Mon CV
             </h2>
-
             <p className="mt-3 text-slate-600">
               Ajoutez ou remplacez votre CV.
             </p>
-
             <p className="mt-5 font-semibold text-emerald-600">
               Gérer mon CV →
             </p>
           </Link>
-
         </div>
 
         <div className="mt-12">
@@ -311,7 +287,6 @@ function CandidateDashboard() {
               <h2 className="text-2xl font-bold text-slate-900">
                 Mes candidatures récentes
               </h2>
-
               <p className="mt-2 text-slate-600">
                 Suivez l’évolution de vos candidatures.
               </p>
@@ -352,25 +327,11 @@ function CandidateDashboard() {
               <table className="w-full min-w-[850px] text-left">
                 <thead className="border-b bg-slate-50">
                   <tr>
-                    <th className="px-6 py-4">
-                      Offre
-                    </th>
-
-                    <th className="px-6 py-4">
-                      Entreprise
-                    </th>
-
-                    <th className="px-6 py-4">
-                      Localisation
-                    </th>
-
-                    <th className="px-6 py-4">
-                      Contrat
-                    </th>
-
-                    <th className="px-6 py-4">
-                      Statut
-                    </th>
+                    <th className="px-6 py-4">Offre</th>
+                    <th className="px-6 py-4">Entreprise</th>
+                    <th className="px-6 py-4">Localisation</th>
+                    <th className="px-6 py-4">Contrat</th>
+                    <th className="px-6 py-4">Statut</th>
                   </tr>
                 </thead>
 
@@ -385,28 +346,22 @@ function CandidateDashboard() {
                         <td className="px-6 py-5 font-semibold">
                           {application.job_title}
                         </td>
-
                         <td className="px-6 py-5">
                           {application.company_name}
                         </td>
-
                         <td className="px-6 py-5">
                           {application.location}
                         </td>
-
                         <td className="px-6 py-5">
                           {application.contract_type}
                         </td>
-
                         <td className="px-6 py-5">
                           <span
                             className={`rounded-full px-3 py-1 text-sm font-semibold ${getStatusClasses(
                               application.status
                             )}`}
                           >
-                            {getStatusLabel(
-                              application.status
-                            )}
+                            {getStatusLabel(application.status)}
                           </span>
                         </td>
                       </tr>
@@ -428,10 +383,8 @@ function CandidateDashboard() {
                 <p className="text-sm font-semibold text-slate-500">
                   Titre professionnel
                 </p>
-
                 <p className="mt-1 text-slate-900">
-                  {profile.professional_title ||
-                    "Non renseigné"}
+                  {profile.professional_title || "Non renseigné"}
                 </p>
               </div>
 
@@ -439,10 +392,8 @@ function CandidateDashboard() {
                 <p className="text-sm font-semibold text-slate-500">
                   Ville
                 </p>
-
                 <p className="mt-1 text-slate-900">
-                  {profile.city ||
-                    "Non renseignée"}
+                  {profile.city || "Non renseignée"}
                 </p>
               </div>
 
@@ -450,10 +401,8 @@ function CandidateDashboard() {
                 <p className="text-sm font-semibold text-slate-500">
                   Compétences
                 </p>
-
                 <p className="mt-1 text-slate-900">
-                  {profile.skills ||
-                    "Non renseignées"}
+                  {profile.skills || "Non renseignées"}
                 </p>
               </div>
 
@@ -461,7 +410,6 @@ function CandidateDashboard() {
                 <p className="text-sm font-semibold text-slate-500">
                   CV
                 </p>
-
                 <p className="mt-1 text-slate-900">
                   {profile.cv
                     ? "CV disponible"

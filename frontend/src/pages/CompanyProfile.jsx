@@ -13,6 +13,10 @@ import {
 
 import api from "../services/api";
 
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "http://localhost:5000";
+
 function CompanyProfile() {
   const [formData, setFormData] = useState({
     contactName: "",
@@ -170,7 +174,6 @@ function CompanyProfile() {
       setError(
         "Veuillez sélectionner un logo."
       );
-
       return;
     }
 
@@ -241,10 +244,10 @@ function CompanyProfile() {
     }
 
     if (logoPath.startsWith("uploads/")) {
-      return `http://localhost:5000/${logoPath}`;
+      return `${BACKEND_URL}/${logoPath}`;
     }
 
-    return `http://localhost:5000/uploads/logos/${logoPath}`;
+    return `${BACKEND_URL}/uploads/logos/${logoPath}`;
   }
 
   if (loading) {

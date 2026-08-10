@@ -10,6 +10,10 @@ import {
 
 import api from "../services/api";
 
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "http://localhost:5000";
+
 function AdminCompanies() {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -187,7 +191,7 @@ function AdminCompanies() {
                       <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-blue-50 text-lg font-bold text-blue-600">
                         {company.logo ? (
                           <img
-                            src={`http://localhost:5000/${company.logo}`}
+                            src={`${BACKEND_URL}/${company.logo}`}
                             alt={company.company_name}
                             className="h-full w-full object-cover"
                           />

@@ -14,6 +14,10 @@ import {
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "http://localhost:5000";
+
 function CompanyDashboard() {
   const { user, logout } = useAuth();
 
@@ -85,10 +89,10 @@ function CompanyDashboard() {
     }
 
     if (logoPath.startsWith("uploads/")) {
-      return `http://localhost:5000/${logoPath}`;
+      return `${BACKEND_URL}/${logoPath}`;
     }
 
-    return `http://localhost:5000/uploads/logos/${logoPath}`;
+    return `${BACKEND_URL}/uploads/logos/${logoPath}`;
   }
 
   if (loading) {

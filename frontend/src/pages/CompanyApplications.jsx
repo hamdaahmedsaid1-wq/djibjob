@@ -11,6 +11,10 @@ import {
 
 import api from "../services/api";
 
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "http://localhost:5000";
+
 function CompanyApplications() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -269,7 +273,7 @@ function CompanyApplications() {
                         </p>
 
                         <a
-                          href={`http://localhost:5000/${application.candidate_cv}`}
+                          href={`${BACKEND_URL}/${application.candidate_cv}`}
                           target="_blank"
                           rel="noreferrer"
                           className="mt-2 inline-flex font-semibold text-blue-600"

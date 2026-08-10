@@ -8,6 +8,10 @@ import {
 
 import api from "../services/api";
 
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "http://localhost:5000";
+
 function CandidateCv() {
   const [currentCv, setCurrentCv] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -115,7 +119,8 @@ function CandidateCv() {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type":
+              "multipart/form-data",
           },
         }
       );
@@ -131,9 +136,10 @@ function CandidateCv() {
           "CV ajouté avec succès."
       );
 
-      const input = document.getElementById(
-        "candidate-cv"
-      );
+      const input =
+        document.getElementById(
+          "candidate-cv"
+        );
 
       if (input) {
         input.value = "";
@@ -166,15 +172,15 @@ function CandidateCv() {
     }
 
     if (cvPath.startsWith("uploads/")) {
-      return `http://localhost:5000/${cvPath}`;
+      return `${BACKEND_URL}/${cvPath}`;
     }
 
-    return `http://localhost:5000/uploads/cvs/${cvPath}`;
+    return `${BACKEND_URL}/uploads/cvs/${cvPath}`;
   }
 
   if (loading) {
     return (
-      <section className="mx-auto max-w-4xl px-6 py-12">
+      <section className="mx-auto max-w-5xl px-6 py-12">
         <p className="text-lg text-slate-600">
           Chargement de votre CV...
         </p>
@@ -183,7 +189,7 @@ function CandidateCv() {
   }
 
   return (
-    <section className="mx-auto max-w-4xl px-6 py-12">
+    <section className="mx-auto max-w-5xl px-6 py-12">
       <Link
         to="/candidate/dashboard"
         className="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-700"
