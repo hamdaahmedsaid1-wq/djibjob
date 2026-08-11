@@ -15,6 +15,29 @@ const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL ||
   "http://localhost:5000";
 
+// Construit correctement l'URL du CV
+function buildCvUrl(cvPath) {
+  if (!cvPath) {
+    return "";
+  }
+
+  // Si l'URL est déjà complète
+  if (
+    cvPath.startsWith("http://") ||
+    cvPath.startsWith("https://")
+  ) {
+    return cvPath;
+  }
+
+  // Si le chemin contient déjà uploads/
+  if (cvPath.startsWith("uploads/")) {
+    return `${BACKEND_URL}/${cvPath}`;
+  }
+
+  // Sinon, le CV est dans uploads/cvs/
+  return `${BACKEND_URL}/uploads/cvs/${cvPath}`;
+}
+
 function CompanyApplications() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -273,10 +296,12 @@ function CompanyApplications() {
                         </p>
 
                         <a
-                          href={`${BACKEND_URL}/${application.candidate_cv}`}
+                          href={buildCvUrl(
+                            application.candidate_cv
+                          )}
                           target="_blank"
                           rel="noreferrer"
-                          className="mt-2 inline-flex font-semibold text-blue-600"
+                          className="mt-2 inline-flex font-semibold text-blue-600 hover:text-blue-700"
                         >
                           Ouvrir le CV
                         </a>
